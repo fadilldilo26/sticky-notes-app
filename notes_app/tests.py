@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
-from .models import Note # Ensure 'Note' matches your model name
+from .models import Note
+
 
 class StickyNoteTests(TestCase):
     def setUp(self):
