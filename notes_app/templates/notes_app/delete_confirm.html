@@ -1,0 +1,8 @@
+<h1>Are you sure?</h1>
+<p>Are you sure you want to delete "{{ note.title }}"?</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">Yes, Delete</button>
+    <a href="{% url 'note_list' %}">Cancel</a>
+</form>
