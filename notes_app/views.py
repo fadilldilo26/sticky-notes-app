@@ -1,12 +1,18 @@
+<<<<<<< HEAD
 from django.shortcuts import render, redirect
+=======
+from django.shortcuts import render, redirect, get_object_or_404
+>>>>>>> 54f2b59f75a23eb267e8bed111d633196769ddb7
 from .models import Note
 from .forms import NoteForm
 from django.shortcuts import get_object_or_404
 
 
+# List and Create View
 def note_list(request):
     """View to list all notes."""
     notes = Note.objects.all().order_by('-created_at')
+<<<<<<< HEAD
     return render(request, 'notes_app/index.html', {'notes': notes})
 
 def add_note(request):
@@ -44,3 +50,31 @@ def edit_note(request, note_id):
         
     return render(request, 'notes_app/edit_note.html', {'form': form, 'note': note})
 
+=======
+    
+    if request.method == "POST":
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+        if title and content:
+            Note.objects.create(title=title, content=content)
+            return redirect('note_list')
+
+    return render(request, 'notes_app/index.html', {'notes': notes})
+
+# Update View
+def note_edit(request, note_id):
+    note = get_object_or_404(Note, id=note_id)
+    if request.method == "POST":
+        note.title = request.POST.get('title')
+        note.content = request.POST.get('content')
+        note.save()
+        return redirect('note_list')
+    return render(request, 'notes_app/edit_note.html', {'note': note})
+
+# Delete View
+def delete_note(request, note_id):
+    note = get_object_or_404(Note, id=note_id)
+    if request.method == "POST":
+        note.delete()
+    return redirect('note_list')
+>>>>>>> 54f2b59f75a23eb267e8bed111d633196769ddb7
