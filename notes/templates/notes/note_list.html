@@ -1,0 +1,124 @@
+<!-- node_list.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Note List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        h1 {
+            text-align: center;
+        }
+        
+        .container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .node-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .node-item h3 {
+            margin-top: 0;
+        }
+        
+        .node-item p {
+            margin-bottom: 0;
+        }
+        
+        .node-item .actions {
+            margin-top: 10px;
+        }
+        
+        .node-item .actions a {
+            margin-right: 10px;
+            color: #ffffff;
+            text-decoration: none;
+        }
+        
+        .node-item .actions a:hover {
+            text-decoration: underline;
+        }
+        .create-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .delete-button {
+            top: 20px;
+            right: 20px;
+            background-color: #ca5e49;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .edit-button {
+            top: 20px;
+            right: 20px;
+            background-color: #dab149;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+            .create-button {
+                top: 10px;
+                right: 10px;
+                padding: 5px 10px;
+            }
+            .node-item {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Notes List</h1>
+        <a href="{% url 'create_note' %}" class="create-button">Create New Note</a>
+        {% if notes %}
+            {% for node in notes %}
+                <div class="node-item">
+                    <h3>{{ node.title }}</h3>
+                    <p>{{ node.content }}</p>
+                    <div class="actions">
+                        <a href="{% url 'update_note' node.id %}" class="edit-button">Edit</a>
+                        <a href="{% url 'delete_note' node.id %}" class="delete-button">Delete</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No notes found.</p>
+        {% endif %}
+        
+        
+    </div>
+</body>
+</html>

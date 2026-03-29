@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Delete Note</title>
+    <style>
+        /* CSS code for delete_note.html */
+
+        /* Form styles */
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+        }
+
+        /* Title styles */
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* Button styles */
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            padding: 10px 20px;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+
+        .button-container .delete-button {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        /* Responsive styles */
+        @media screen and (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            .title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Delete Note</h1>
+    <p>Are you sure you want to delete the following note?</p>
+    <p>Title: {{ note.title }}</p>
+    <p>Content: {{ note.content }}</p>
+    <form method="post" action="{% url 'delete_note' note.id %}">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+    </form>
+</body>
+
+</html>
+
+<!DOCTYPE html>
+<html>
