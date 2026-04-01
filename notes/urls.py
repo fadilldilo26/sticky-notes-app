@@ -1,6 +1,8 @@
 from django.urls import path, include
 from . import views
 
+
+# Define URL patterns for the notes app, mapping URLs to their corresponding view functions.
 urlpatterns = [
     path('', views.note_list, name='notes'),
     path('create-note/', views.create_note, name='create_note'),
